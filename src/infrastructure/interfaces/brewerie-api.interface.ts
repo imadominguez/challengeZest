@@ -1,4 +1,4 @@
-export interface BrewerieAPIResponse {
+export interface BreweriesAPIResponse {
   brewerie: BreweryAPI[];
 }
 
