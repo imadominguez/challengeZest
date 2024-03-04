@@ -1,12 +1,13 @@
 import {SearchScreen} from '../screens/search/SearchScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 import Icon from 'react-native-vector-icons/Ionicons';
-import {HomeScreen} from '../screens/home/HomeScreen';
+
 import {HomeStackNavigator} from './HomeStackNavigator';
 
 export type RootTabParamList = {
   Home: undefined;
+  Favorite: undefined;
   Search: undefined;
 };
 
@@ -50,6 +51,7 @@ export const TabNavigator = () => {
           ),
         }}
       />
+
       <Tab.Screen
         name="Search"
         component={SearchScreen}
@@ -57,6 +59,15 @@ export const TabNavigator = () => {
           headerShown: true,
           tabBarIcon: ({color, size}) => (
             <Icon name="search" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Favorite"
+        component={HomeStackNavigator}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Icon name="home" size={size} color={color} />
           ),
         }}
       />

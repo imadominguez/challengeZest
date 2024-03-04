@@ -5,7 +5,7 @@ import {DetailsScreen} from '../screens/details/DetailsScreen';
 
 export type HomeScreenStackParamList = {
   HomeScreen: undefined;
-  Details: undefined;
+  Details: {brewerieId: string};
 };
 
 const HomeScreenStackNavigation =
