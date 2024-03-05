@@ -1,8 +1,9 @@
 import {StyleSheet} from 'react-native';
+import {useTheme} from 'react-native-paper';
 
 export const globalTheme = StyleSheet.create({
   globalMargin: {
-    marginHorizontal: 20,
+    paddingHorizontal: 20,
   },
   container: {
     flex: 1,
