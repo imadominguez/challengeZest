@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {HomeStackNavigator} from './HomeStackNavigator';
 import {FavoritesScreen} from '../screens/favorites/FavoritesScreen';
 import {useTheme} from 'react-native-paper';
+import {SearchStackNavigator} from './SearchStackNavigator';
+import {FavoritesStackNavigator} from './FavoriteStackNavigator';
 
 export type RootTabParamList = {
   Home: undefined;
@@ -46,7 +48,7 @@ export const TabNavigator = () => {
 
       <Tab.Screen
         name="Search"
-        component={SearchScreen}
+        component={SearchStackNavigator}
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
@@ -56,7 +58,7 @@ export const TabNavigator = () => {
       />
       <Tab.Screen
         name="Favorite"
-        component={FavoritesScreen}
+        component={FavoritesStackNavigator}
         options={{
           tabBarIcon: ({color, size}) => (
             <Icon name="home" size={size} color={color} />
