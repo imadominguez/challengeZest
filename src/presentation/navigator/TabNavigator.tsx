@@ -4,6 +4,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {HomeStackNavigator} from './HomeStackNavigator';
+import {FavoritesScreen} from '../screens/favorites/FavoritesScreen';
+import {useTheme} from 'react-native-paper';
 
 export type RootTabParamList = {
   Home: undefined;
@@ -14,33 +16,23 @@ export type RootTabParamList = {
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
 export const TabNavigator = () => {
+  const {dark} = useTheme();
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      // tabBarOptions={{
-      //   activeTintColor: COLORS.primary,
-      //   inactiveTintColor: COLORS.gray,
-      // }}
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: 'orange',
-        // tabBarInactiveTintColor: 'gray',
-        // tabBarStyle: {
-        //   backgroundColor: 'white',
-        // },
+        tabBarStyle: {
+          backgroundColor: dark ? '#1e1e1e' : '#ffffff',
+        },
         tabBarLabelStyle: {
           fontSize: 12,
         },
-        // tabBarIconStyle: {
-        //   width: 20,
-        //   height: 20,
-        // },
         tabBarItemStyle: {
           paddingVertical: 5,
         },
-        // tabBarShowLabel: true,
-        // tabBarActiveBackgroundColor: 'white',
-        // tabBarInactiveBackgroundColor: 'white',
+        tabBarActiveBackgroundColor: dark ? '#141414' : '#2a2a2a',
       }}>
       <Tab.Screen
         name="Home"
@@ -56,7 +48,7 @@ export const TabNavigator = () => {
         name="Search"
         component={SearchScreen}
         options={{
-          headerShown: true,
+          headerShown: false,
           tabBarIcon: ({color, size}) => (
             <Icon name="search" size={size} color={color} />
           ),
@@ -64,7 +56,7 @@ export const TabNavigator = () => {
       />
       <Tab.Screen
         name="Favorite"
-        component={HomeStackNavigator}
+        component={FavoritesScreen}
         options={{
           tabBarIcon: ({color, size}) => (
             <Icon name="home" size={size} color={color} />
