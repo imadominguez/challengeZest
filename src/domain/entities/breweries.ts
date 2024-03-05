@@ -13,4 +13,6 @@ export interface Brewerie {
   url: string | null;
   state: string;
   street: string;
+  image: string;
+  imageDetails: string[];
 }
