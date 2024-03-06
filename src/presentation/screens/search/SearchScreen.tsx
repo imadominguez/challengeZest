@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {View, FlatList} from 'react-native';
 import {ActivityIndicator, Text, TextInput, useTheme} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {globalTheme} from '../../../config/theme/global-theme';
+import {colors, globalTheme} from '../../../config/theme/global-theme';
 import {useDebouncedValue} from '../../hooks/useDebouncedValue';
 import {getBrewerieByName} from '../../../actions/breweries/get-brewerie-by-name';
 import {useQuery} from '@tanstack/react-query';
@@ -25,24 +25,27 @@ export const SearchScreen = () => {
   });
 
   return (
-    <View style={[globalTheme.globalMargin, {paddingTop: top + 10, flex: 1}]}>
-      <HeaderScreen text="Busca tu cerveceria" />
-      <View>
+    <View style={{paddingTop: top + 10, flex: 1}}>
+      <HeaderScreen title="Busca tu cerveceria" />
+      <View style={{...globalTheme.globalMargin}}>
         <TextInput
           placeholder="Ingresa un nombre"
+          placeholderTextColor={dark ? '#fff' : '#4b4b4b'}
           mode="flat"
           autoFocus
           autoCorrect={false}
           value={term}
           onChangeText={setTerm}
-          style={{backgroundColor: dark ? '#fff' : ''}}
+          style={{
+            backgroundColor: dark ? colors.dark.bg_200 : colors.light.bg_200,
+          }}
         />
         <Icon
           name="search"
           size={22}
           style={{
             position: 'absolute',
-            right: 10,
+            right: 40,
             top: 15,
             color: dark ? '#fff' : '#4b4b4b',
             zIndex: 999,
@@ -57,7 +60,7 @@ export const SearchScreen = () => {
       <FlatList
         data={breweries}
         keyExtractor={brewerie => brewerie.id}
-        numColumns={2}
+        numColumns={1}
         style={{paddingTop: top + 20}}
         renderItem={({item}) => <CardBrewerie brewerie={item} />}
         onEndReachedThreshold={0.6}
@@ -70,13 +73,11 @@ export const SearchScreen = () => {
               alignItems: 'center',
               alignContent: 'center',
             }}>
-            <Text>
-              {term.length === 0
-                ? 'Haz una busqueda'
-                : term.length > 0 &&
-                  breweries?.length === 0 &&
-                  !isLoading &&
-                  'No se encontraron cervecerias'}
+            <Text variant="headlineLarge">
+              {term.length > 0 &&
+                breweries?.length === 0 &&
+                !isLoading &&
+                'No se encontraron cervecerias'}
             </Text>
           </View>
         )}

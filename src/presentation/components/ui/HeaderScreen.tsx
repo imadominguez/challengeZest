@@ -3,10 +3,11 @@ import {Text, useTheme} from 'react-native-paper';
 import {colors} from '../../../config/theme/global-theme';
 
 interface Props {
-  text: string;
+  title: string;
+  subtitle?: string;
 }
 
-export const HeaderScreen = ({text}: Props) => {
+export const HeaderScreen = ({title, subtitle}: Props) => {
   const {dark} = useTheme();
   return (
     <View
@@ -16,6 +17,7 @@ export const HeaderScreen = ({text}: Props) => {
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 10,
+        backgroundColor: dark ? colors.dark.bg_200 : colors.light.bg_300,
       }}>
       <Text
         variant="headlineMedium"
@@ -25,8 +27,19 @@ export const HeaderScreen = ({text}: Props) => {
           fontWeight: 'bold',
           color: dark ? colors.dark.text_100 : colors.light.text_100,
         }}>
-        {text}
+        {title}
       </Text>
+      {subtitle && (
+        <Text
+          variant="headlineSmall"
+          style={{
+            paddingBottom: 20,
+            fontWeight: 'bold',
+            color: dark ? colors.dark.text_100 : colors.light.text_100,
+          }}>
+          {subtitle}
+        </Text>
+      )}
     </View>
   );
 };

@@ -30,7 +30,7 @@ export const HomeScreen = () => {
         paddingTop: Platform.OS === 'ios' ? top + 20 : 0,
         backgroundColor: isDark ? colors.dark.bg_100 : colors.light.bg_100,
       }}>
-      <HeaderScreen text="Brewery APP" />
+      <HeaderScreen title="Brewery APP" />
 
       <View
         style={{

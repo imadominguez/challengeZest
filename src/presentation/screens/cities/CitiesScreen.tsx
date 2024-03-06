@@ -1,89 +1,92 @@
-import {useQuery} from '@tanstack/react-query';
-import {View, Text, FlatList, Pressable} from 'react-native';
-import {getCities} from '../../../actions/cities/get-cities';
-import {ScreenLoader} from '../../components/loaders/ScreenLoader';
-import {HeaderScreen} from '../../components/ui/HeaderScreen';
 import {useState} from 'react';
+import {View, FlatList} from 'react-native';
+import {ActivityIndicator, Text, TextInput, useTheme} from 'react-native-paper';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {colors, globalTheme} from '../../../config/theme/global-theme';
 import {useDebouncedValue} from '../../hooks/useDebouncedValue';
-import {getBrewerieByCity} from '../../../actions/breweries/get-brewerie-by-city';
+import {getBrewerieByName} from '../../../actions/breweries/get-brewerie-by-name';
+import {useQuery} from '@tanstack/react-query';
 import {CardBrewerie} from '../../components/brewerie/CardBrewerie';
-import {ActivityIndicator} from 'react-native-paper';
-import {globalTheme} from '../../../config/theme/global-theme';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {HeaderScreen} from '../../components/ui/HeaderScreen';
+import {getBrewerieByCity} from '../../../actions/breweries/get-brewerie-by-city';
 
 export const CitiesScreen = () => {
-  const [city, setCity] = useState('');
+  const {dark} = useTheme();
+  const {top} = useSafeAreaInsets();
+  const [term, setTerm] = useState('');
 
-  const debounceValue = useDebouncedValue(city, 100);
+  const debounceValue = useDebouncedValue(term, 500);
 
-  const {isLoading, data: cities} = useQuery({
-    queryKey: ['cities'],
-    queryFn: () => getCities(),
-  });
-
-  const {isLoading: loading, data: breweriesByCity} = useQuery({
-    queryKey: ['cities', debounceValue],
+  const {isLoading, data: breweries} = useQuery({
+    queryKey: ['breweries', debounceValue],
     queryFn: () => getBrewerieByCity(debounceValue),
     enabled: !!debounceValue,
   });
 
-  if (isLoading) {
-    return <ScreenLoader />;
-  }
-
   return (
-    <View>
-      <HeaderScreen text="Busca por ciudad" />
-      <View>
-        <FlatList
-          data={cities}
-          renderItem={({item}) => (
-            <Pressable
-              onPress={() => setCity(item.name)}
-              style={{
-                backgroundColor: 'red',
-                width: 100,
-                height: 50,
-                borderRadius: 20,
-                justifyContent: 'center',
-                alignItems: 'center',
-                margin: 10,
-                shadowColor: '#000',
-                shadowOffset: {
-                  width: 0,
-                  height: 2,
-                },
-                shadowOpacity: 0.25,
-                shadowRadius: 3.84,
-                elevation: 5,
-                overflow: 'hidden',
-                opacity: 0.9,
-                borderWidth: 1,
-                borderColor: 'black',
-              }}>
-              <Text>{item.name}</Text>
-            </Pressable>
-          )}
-          keyExtractor={item => item.name}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        />
-      </View>
-
-      {loading && <ActivityIndicator size="large" />}
-      <View
-        style={{
-          ...globalTheme.globalMargin,
-        }}>
-        <FlatList
-          data={breweriesByCity}
-          renderItem={({item}) => <CardBrewerie brewerie={item} />}
-          keyExtractor={item => item.id}
-          showsVerticalScrollIndicator={false}
+    <View style={{paddingTop: top + 10, flex: 1}}>
+      <HeaderScreen
+        title="Busca tu cerveceria"
+        subtitle="En la ciudad que te encuentres"
+      />
+      <View style={{...globalTheme.globalMargin}}>
+        <TextInput
+          placeholder="Ingresa una ciudad"
+          placeholderTextColor={dark ? '#fff' : '#4b4b4b'}
+          mode="flat"
+          autoFocus
+          autoCorrect={false}
+          value={term}
+          onChangeText={setTerm}
           style={{
-            marginBottom: 50,
+            backgroundColor: dark ? colors.dark.bg_200 : colors.light.bg_200,
+          }}
+        />
+        <Icon
+          name="search"
+          size={22}
+          style={{
+            position: 'absolute',
+            right: 40,
+            top: 15,
+            color: dark ? '#fff' : '#4b4b4b',
+            zIndex: 999,
           }}
         />
       </View>
+
+      {/* Loader */}
+      {isLoading && <ActivityIndicator size="large" style={{marginTop: 20}} />}
+
+      {/* Lista de breweries */}
+      <FlatList
+        data={breweries}
+        keyExtractor={brewerie => brewerie.id}
+        numColumns={1}
+        style={{paddingTop: top + 20}}
+        renderItem={({item}) => <CardBrewerie brewerie={item} />}
+        onEndReachedThreshold={0.6}
+        ListEmptyComponent={() => (
+          <View
+            style={{
+              flex: 1,
+              marginTop: 100,
+              justifyContent: 'center',
+              alignItems: 'center',
+              alignContent: 'center',
+            }}>
+            <Text variant="headlineLarge">
+              {term.length > 0 &&
+                breweries?.length === 0 &&
+                !isLoading &&
+                'No se encontraron cervecerias'}
+            </Text>
+          </View>
+        )}
+        // onEndReached={() => fetchNextPage()}
+        // showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 };
