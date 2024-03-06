@@ -21,8 +21,8 @@ export const colors = {
     text_100: '#1d1f21',
     text_200: '#444648',
     bg_100: '#ffffff',
-    bg_200: '#eaeaea',
-    bg_300: '#cccccc',
+    bg_200: '#e1e1e1',
+    bg_300: '#c1c1c1',
   },
 };
 
