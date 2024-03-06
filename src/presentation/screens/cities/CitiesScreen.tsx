@@ -28,7 +28,7 @@ export const CitiesScreen = () => {
   return (
     <View style={{paddingTop: Platform.OS === 'ios' ? top + 20 : 0, flex: 1}}>
       <HeaderScreen
-        title="Busca tu cerveceria"
+        title="Busca tu cervecería"
         subtitle="En la ciudad que te encuentres"
       />
       <SearchBrewerie
@@ -58,7 +58,7 @@ export const CitiesScreen = () => {
               {term.length > 0 &&
                 breweries?.length === 0 &&
                 !isLoading &&
-                'No se encontraron cervecerias'}
+                'No se encontraron cervecerías'}
             </Text>
           </View>
         }

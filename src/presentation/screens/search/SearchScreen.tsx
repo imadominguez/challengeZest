@@ -27,7 +27,7 @@ export const SearchScreen = () => {
 
   return (
     <View style={{paddingTop: Platform.OS === 'ios' ? top + 20 : 0, flex: 1}}>
-      <HeaderScreen title="Busca tu cerveceria" />
+      <HeaderScreen title="Busca tu cervecería" />
       <SearchBrewerie
         term={term}
         setTerm={setTerm}

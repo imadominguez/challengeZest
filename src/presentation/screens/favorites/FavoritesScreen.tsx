@@ -28,7 +28,7 @@ export const FavoritesScreen = () => {
       : breweriesFiltered;
   return (
     <>
-      <HeaderScreen title="Tus cervecerias favoritas" />
+      <HeaderScreen title="Tus cervecerías favoritas" />
       <SearchBrewerie term={term} setTerm={setTerm} placeholder="Buscar" />
       <View
         style={{
@@ -46,7 +46,7 @@ export const FavoritesScreen = () => {
               style={{
                 textAlign: 'center',
               }}>
-              No tenes ninguna cerveceria agregada a favoritos
+              No tenes ninguna cervecería agregada a favoritos
             </Text>
           </View>
         ) : (
