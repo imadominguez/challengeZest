@@ -1,5 +1,8 @@
-import {Brewerie} from '../../domain/entities/breweries';
-import {BreweryAPI} from '../interfaces/brewerie-api.interface';
+import {Brewerie, BreweriesMetada} from '../../domain/entities/breweries';
+import {
+  BreweriesAPIMetadata,
+  BreweryAPI,
+} from '../interfaces/brewerie-api.interface';
 
 const images = [
   'https://images.unsplash.com/photo-1584225064536-d0fbc0a10f18?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -48,6 +51,14 @@ export class BrewerieMapper {
       street: brewerie.street,
       image: getRandomImage(),
       imageDetails: getRandomImageDetails(),
+    };
+  }
+
+  static breweriesMetadataToEntity(
+    metadata: BreweriesAPIMetadata,
+  ): BreweriesMetada {
+    return {
+      total: +metadata.total,
     };
   }
 }

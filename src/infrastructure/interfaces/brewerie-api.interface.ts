@@ -20,3 +20,9 @@ export interface BreweryAPI {
   website_url: string | null;
   street: string;
 }
+
+export interface BreweriesAPIMetadata {
+  total: string;
+  page: string;
+  per_page: string;
+}

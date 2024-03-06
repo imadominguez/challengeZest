@@ -16,3 +16,7 @@ export interface Brewerie {
   image: string;
   imageDetails: string[];
 }
+
+export interface BreweriesMetada {
+  total: number;
+}
