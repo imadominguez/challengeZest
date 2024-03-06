@@ -3,15 +3,18 @@ import {Brewerie} from '../../../domain/entities/breweries';
 
 interface BrewerieStore {
   breweries: Brewerie[];
-
+  breweriesFiltered: Brewerie[];
   // añadimos o eliminamos una brewerie
   updateBrewerie: (brewerie: Brewerie) => void;
   // limpiamos las breweries
   clearBreweries: () => void;
+  // buscar breweries
+  searchBreweries: (term: string) => void;
 }
 
 export const useBrewerieStore = create<BrewerieStore>(set => ({
   breweries: [],
+  breweriesFiltered: [],
   updateBrewerie: brewerie => {
     set(state => {
       const existingBrewerie = state.breweries.find(b => b.id === brewerie.id);
@@ -24,5 +27,17 @@ export const useBrewerieStore = create<BrewerieStore>(set => ({
       }
     });
   },
-  clearBreweries: () => set({breweries: []}),
+  clearBreweries: () => set({breweriesFiltered: []}),
+  searchBreweries: term =>
+    set(state => {
+      const searchWords = term.toLowerCase().split(' ');
+      const filteredBreweries = state.breweries.filter(b =>
+        searchWords.every(word => b.name.toLowerCase().includes(word)),
+      );
+      console.log(filteredBreweries);
+      return {
+        breweriesFiltered:
+          filteredBreweries.length > 0 ? filteredBreweries : [],
+      };
+    }),
 }));
