@@ -8,11 +8,13 @@ import {FavoritesScreen} from '../screens/favorites/FavoritesScreen';
 import {useTheme} from 'react-native-paper';
 import {SearchStackNavigator} from './SearchStackNavigator';
 import {FavoritesStackNavigator} from './FavoriteStackNavigator';
+import {CitiesScreen} from '../screens/cities/CitiesScreen';
 
 export type RootTabParamList = {
   Home: undefined;
   Favorite: undefined;
   Search: undefined;
+  Cities: undefined;
 };
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
@@ -53,6 +55,15 @@ export const TabNavigator = () => {
           headerShown: false,
           tabBarIcon: ({color, size}) => (
             <Icon name="search" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Cities"
+        component={CitiesScreen}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Icon name="navigate-circle" size={size} color={color} />
           ),
         }}
       />
