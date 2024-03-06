@@ -54,7 +54,6 @@ export const HomeScreen = () => {
       <View
         style={{
           flex: 1,
-          ...globalTheme.globalMargin,
         }}>
         {isLoadingBreweries ? (
           <ScreenLoader />

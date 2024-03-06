@@ -1,5 +1,5 @@
 import {useContext, useState} from 'react';
-import {View} from 'react-native';
+import {Platform, View} from 'react-native';
 import {useQuery} from '@tanstack/react-query';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ActivityIndicator, Text} from 'react-native-paper';
@@ -26,9 +26,13 @@ export const SearchScreen = () => {
   });
 
   return (
-    <View style={{paddingTop: top + 10, flex: 1}}>
+    <View style={{paddingTop: Platform.OS === 'ios' ? top + 20 : 0, flex: 1}}>
       <HeaderScreen title="Busca tu cerveceria" />
-      <SearchBrewerie term={term} setTerm={setTerm} />
+      <SearchBrewerie
+        term={term}
+        setTerm={setTerm}
+        placeholder="Ingresa un nombre"
+      />
 
       {/* Loader */}
       {isLoading && <ActivityIndicator size="large" style={{marginTop: 20}} />}

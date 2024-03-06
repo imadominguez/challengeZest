@@ -1,6 +1,7 @@
 import {View, Text, FlatList} from 'react-native';
 import {Brewerie} from '../../../domain/entities/breweries';
 import {CardBrewerie} from './CardBrewerie';
+import {globalTheme} from '../../../config/theme/global-theme';
 
 interface Props {
   breweries: Brewerie[];
@@ -16,14 +17,16 @@ export const FlatListBreweries = ({
   ListEmptyComponent,
 }: Props) => {
   return (
-    <FlatList
-      data={breweries}
-      style={style}
-      keyExtractor={(brewerie: Brewerie) => brewerie.id}
-      numColumns={numColumns}
-      renderItem={({item}: any) => <CardBrewerie brewerie={item} />}
-      showsVerticalScrollIndicator={false}
-      ListEmptyComponent={() => ListEmptyComponent}
-    />
+    <View style={globalTheme.globalMargin}>
+      <FlatList
+        data={breweries}
+        style={style}
+        keyExtractor={(brewerie: Brewerie) => brewerie.id}
+        numColumns={numColumns}
+        renderItem={({item}: any) => <CardBrewerie brewerie={item} />}
+        showsVerticalScrollIndicator={false}
+        ListEmptyComponent={() => ListEmptyComponent}
+      />
+    </View>
   );
 };

@@ -1,11 +1,10 @@
-import {useContext, useState} from 'react';
-import {View} from 'react-native';
+import {useState} from 'react';
+import {Platform, View} from 'react-native';
 import {useQuery} from '@tanstack/react-query';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {ActivityIndicator, Text, TextInput, useTheme} from 'react-native-paper';
-import {colors, globalTheme} from '../../../config/theme/global-theme';
+import {ActivityIndicator, Text} from 'react-native-paper';
+
 import {useDebouncedValue} from '../../hooks';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import {getBrewerieByCity} from '../../../actions/breweries/get-brewerie-by-city';
 import {
@@ -13,7 +12,6 @@ import {
   FlatListBreweries,
   SearchBrewerie,
 } from '../../components';
-import {ThemeContext} from '../../context/ThemeContext';
 
 export const CitiesScreen = () => {
   const {top} = useSafeAreaInsets();
@@ -28,12 +26,16 @@ export const CitiesScreen = () => {
   });
 
   return (
-    <View style={{paddingTop: top + 10, flex: 1}}>
+    <View style={{paddingTop: Platform.OS === 'ios' ? top + 20 : 0, flex: 1}}>
       <HeaderScreen
         title="Busca tu cerveceria"
         subtitle="En la ciudad que te encuentres"
       />
-      <SearchBrewerie term={term} setTerm={setTerm} />
+      <SearchBrewerie
+        term={term}
+        setTerm={setTerm}
+        placeholder="Ingresa una ciudad"
+      />
 
       {/* Loader */}
       {isLoading && <ActivityIndicator size="large" style={{marginTop: 20}} />}

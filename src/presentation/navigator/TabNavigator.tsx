@@ -72,7 +72,7 @@ export const TabNavigator = () => {
         component={FavoritesStackNavigator}
         options={{
           tabBarIcon: ({color, size}) => (
-            <Icon name="home" size={size} color={color} />
+            <Icon name="star" size={size} color={color} />
           ),
         }}
       />

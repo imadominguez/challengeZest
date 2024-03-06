@@ -51,8 +51,6 @@ export const DetailsScreen = ({route}: Props) => {
     <ScrollView>
       <View
         style={{
-          borderBottomStartRadius: 30,
-          borderBottomEndRadius: 30,
           overflow: 'hidden',
         }}>
         <FlatList

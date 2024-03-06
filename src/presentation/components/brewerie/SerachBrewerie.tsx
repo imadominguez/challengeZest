@@ -8,14 +8,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 interface Props {
   term: string;
   setTerm: (value: string) => void;
+  placeholder: string;
 }
 
-export const SearchBrewerie = ({term, setTerm}: Props) => {
+export const SearchBrewerie = ({term, setTerm, placeholder}: Props) => {
   const {isDark} = useContext(ThemeContext);
   return (
     <View style={{...globalTheme.globalMargin}}>
       <TextInput
-        placeholder="Ingresa una ciudad"
+        placeholder={placeholder}
         placeholderTextColor={isDark ? '#fff' : '#4b4b4b'}
         mode="flat"
         autoFocus
