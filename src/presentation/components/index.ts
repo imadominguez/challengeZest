@@ -1,6 +1,7 @@
 export * from './brewerie/ButtonFavoriteBrewerie';
 export * from './brewerie/CardBrewerie';
 export * from './brewerie/FlatListBreweries';
+export * from './brewerie/SerachBrewerie';
 export * from './loaders/ScreenLoader';
 export * from './ui/HeaderScreen';
 export * from './ui/paginated/ButtonPaginated';
