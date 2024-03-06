@@ -9,6 +9,7 @@ import {ButtonPaginated} from '../../components/ui/paginated/ButtonPaginated';
 import {ButtonsPaginated} from '../../components/ui/paginated/ButtonsPaginated';
 import {useContext} from 'react';
 import {ThemeContext} from '../../context/ThemeContext';
+import {FlatListBreweries} from '../../components/brewerie/FlatListBreweries';
 
 export const HomeScreen = () => {
   const {top} = useSafeAreaInsets();
@@ -57,13 +58,7 @@ export const HomeScreen = () => {
         {isLoadingBreweries ? (
           <ScreenLoader />
         ) : (
-          <FlatList
-            data={breweries ?? []}
-            keyExtractor={brewerie => brewerie.id}
-            numColumns={1}
-            renderItem={({item}) => <CardBrewerie brewerie={item} />}
-            showsVerticalScrollIndicator={false}
-          />
+          <FlatListBreweries breweries={breweries ?? []} numColumns={1} />
         )}
       </View>
     </View>

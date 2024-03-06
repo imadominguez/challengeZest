@@ -10,6 +10,7 @@ import {CardBrewerie} from '../../components/brewerie/CardBrewerie';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import {HeaderScreen} from '../../components/ui/HeaderScreen';
+import {FlatListBreweries} from '../../components/brewerie/FlatListBreweries';
 
 export const SearchScreen = () => {
   const {dark} = useTheme();
@@ -57,14 +58,11 @@ export const SearchScreen = () => {
       {isLoading && <ActivityIndicator size="large" style={{marginTop: 20}} />}
 
       {/* Lista de breweries */}
-      <FlatList
-        data={breweries}
-        keyExtractor={brewerie => brewerie.id}
+      <FlatListBreweries
+        breweries={breweries ?? []}
         numColumns={1}
         style={{paddingTop: top + 20}}
-        renderItem={({item}) => <CardBrewerie brewerie={item} />}
-        onEndReachedThreshold={0.6}
-        ListEmptyComponent={() => (
+        ListEmptyComponent={
           <View
             style={{
               flex: 1,
@@ -80,9 +78,7 @@ export const SearchScreen = () => {
                 'No se encontraron cervecerias'}
             </Text>
           </View>
-        )}
-        // onEndReached={() => fetchNextPage()}
-        // showsVerticalScrollIndicator={false}
+        }
       />
     </View>
   );

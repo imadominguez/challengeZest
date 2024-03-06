@@ -1,9 +1,10 @@
 import {View, FlatList} from 'react-native';
-import {useBrewerieStore} from '../../store/favorites-breweries.store';
+import {useBrewerieStore} from '../../store/breweries/favorites-breweries.store';
 import {HeaderScreen} from '../../components/ui/HeaderScreen';
 import {CardBrewerie} from '../../components/brewerie/CardBrewerie';
 import {globalTheme} from '../../../config/theme/global-theme';
 import {Text} from 'react-native-paper';
+import {FlatListBreweries} from '../../components/brewerie/FlatListBreweries';
 
 export const FavoritesScreen = () => {
   const breweries = useBrewerieStore(state => state.breweries);
@@ -24,15 +25,7 @@ export const FavoritesScreen = () => {
             No tenes ninguna cerveceria agregada a favoritos
           </Text>
         ) : (
-          <FlatList
-            data={breweries ?? []}
-            keyExtractor={brewerie => brewerie.id}
-            numColumns={1}
-            renderItem={({item}) => <CardBrewerie brewerie={item} />}
-            // onEndReachedThreshold={0.6}
-            // onEndReached={() => fetchNextPage()}
-            showsVerticalScrollIndicator={false}
-          />
+          <FlatListBreweries breweries={breweries ?? []} numColumns={1} />
         )}
       </View>
     </>
