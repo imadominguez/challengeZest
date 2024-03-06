@@ -34,6 +34,7 @@ export const HomeScreen = () => {
 
       <View
         style={{
+          marginHorizontal: 10,
           flexDirection: 'row',
           justifyContent: 'space-between',
           marginVertical: 10,
