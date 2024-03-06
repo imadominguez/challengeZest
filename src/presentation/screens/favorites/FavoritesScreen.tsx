@@ -1,10 +1,8 @@
-import {View, FlatList} from 'react-native';
-import {useBrewerieStore} from '../../store/breweries/favorites-breweries.store';
-import {HeaderScreen} from '../../components/ui/HeaderScreen';
-import {CardBrewerie} from '../../components/brewerie/CardBrewerie';
-import {globalTheme} from '../../../config/theme/global-theme';
+import {View} from 'react-native';
 import {Text} from 'react-native-paper';
-import {FlatListBreweries} from '../../components/brewerie/FlatListBreweries';
+import {globalTheme} from '../../../config/theme/global-theme';
+import {useBrewerieStore} from '../../store/breweries/favorites-breweries.store';
+import {HeaderScreen, FlatListBreweries} from '../../components';
 
 export const FavoritesScreen = () => {
   const breweries = useBrewerieStore(state => state.breweries);

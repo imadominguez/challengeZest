@@ -1,15 +1,16 @@
-import {View, FlatList, Platform} from 'react-native';
+import {useContext} from 'react';
+import {View, Platform} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {colors, globalTheme} from '../../../config/theme/global-theme';
-import {CardBrewerie} from '../../components/brewerie/CardBrewerie';
-import {ScreenLoader} from '../../components/loaders/ScreenLoader';
-import {HeaderScreen} from '../../components/ui/HeaderScreen';
-import {usePaginated} from '../../hooks/usePaginated';
-import {ButtonPaginated} from '../../components/ui/paginated/ButtonPaginated';
-import {ButtonsPaginated} from '../../components/ui/paginated/ButtonsPaginated';
-import {useContext} from 'react';
+import {usePaginated} from '../../hooks';
 import {ThemeContext} from '../../context/ThemeContext';
-import {FlatListBreweries} from '../../components/brewerie/FlatListBreweries';
+import {
+  ScreenLoader,
+  HeaderScreen,
+  ButtonPaginated,
+  ButtonsPaginated,
+  FlatListBreweries,
+} from '../../components';
 
 export const HomeScreen = () => {
   const {top} = useSafeAreaInsets();

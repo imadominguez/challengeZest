@@ -1,19 +1,18 @@
-import {useState} from 'react';
-import {View, FlatList} from 'react-native';
-import {ActivityIndicator, Text, TextInput, useTheme} from 'react-native-paper';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {colors, globalTheme} from '../../../config/theme/global-theme';
-import {useDebouncedValue} from '../../hooks/useDebouncedValue';
-import {getBrewerieByName} from '../../../actions/breweries/get-brewerie-by-name';
+import {useContext, useState} from 'react';
+import {View} from 'react-native';
 import {useQuery} from '@tanstack/react-query';
-import {CardBrewerie} from '../../components/brewerie/CardBrewerie';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {ActivityIndicator, Text, TextInput, useTheme} from 'react-native-paper';
+import {colors, globalTheme} from '../../../config/theme/global-theme';
+import {useDebouncedValue} from '../../hooks';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {HeaderScreen} from '../../components/ui/HeaderScreen';
+
 import {getBrewerieByCity} from '../../../actions/breweries/get-brewerie-by-city';
-import {FlatListBreweries} from '../../components/brewerie/FlatListBreweries';
+import {HeaderScreen, FlatListBreweries} from '../../components';
+import {ThemeContext} from '../../context/ThemeContext';
 
 export const CitiesScreen = () => {
-  const {dark} = useTheme();
+  const {isDark} = useContext(ThemeContext);
   const {top} = useSafeAreaInsets();
   const [term, setTerm] = useState('');
 
@@ -34,14 +33,14 @@ export const CitiesScreen = () => {
       <View style={{...globalTheme.globalMargin}}>
         <TextInput
           placeholder="Ingresa una ciudad"
-          placeholderTextColor={dark ? '#fff' : '#4b4b4b'}
+          placeholderTextColor={isDark ? '#fff' : '#4b4b4b'}
           mode="flat"
           autoFocus
           autoCorrect={false}
           value={term}
           onChangeText={setTerm}
           style={{
-            backgroundColor: dark ? colors.dark.bg_200 : colors.light.bg_200,
+            backgroundColor: isDark ? colors.dark.bg_200 : colors.light.bg_200,
           }}
         />
         <Icon
@@ -51,7 +50,7 @@ export const CitiesScreen = () => {
             position: 'absolute',
             right: 40,
             top: 15,
-            color: dark ? '#fff' : '#4b4b4b',
+            color: isDark ? '#fff' : '#4b4b4b',
             zIndex: 999,
           }}
         />
