@@ -1,13 +1,15 @@
 import {useContext, useState} from 'react';
 import {View} from 'react-native';
 import {useQuery} from '@tanstack/react-query';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {ActivityIndicator, Text, TextInput} from 'react-native-paper';
-import {colors, globalTheme} from '../../../config/theme/global-theme';
+import {ActivityIndicator, Text} from 'react-native-paper';
 import {useDebouncedValue} from '../../hooks';
 import {getBrewerieByName} from '../../../actions/breweries/get-brewerie-by-name';
-import {HeaderScreen, FlatListBreweries} from '../../components';
+import {
+  HeaderScreen,
+  FlatListBreweries,
+  SearchBrewerie,
+} from '../../components';
 import {ThemeContext} from '../../context/ThemeContext';
 
 export const SearchScreen = () => {
@@ -26,31 +28,7 @@ export const SearchScreen = () => {
   return (
     <View style={{paddingTop: top + 10, flex: 1}}>
       <HeaderScreen title="Busca tu cerveceria" />
-      <View style={{...globalTheme.globalMargin}}>
-        <TextInput
-          placeholder="Ingresa un nombre"
-          placeholderTextColor={isDark ? '#fff' : '#4b4b4b'}
-          mode="flat"
-          autoFocus
-          autoCorrect={false}
-          value={term}
-          onChangeText={setTerm}
-          style={{
-            backgroundColor: isDark ? colors.dark.bg_200 : colors.light.bg_200,
-          }}
-        />
-        <Icon
-          name="search"
-          size={22}
-          style={{
-            position: 'absolute',
-            right: 40,
-            top: 15,
-            color: isDark ? '#fff' : '#4b4b4b',
-            zIndex: 999,
-          }}
-        />
-      </View>
+      <SearchBrewerie term={term} setTerm={setTerm} />
 
       {/* Loader */}
       {isLoading && <ActivityIndicator size="large" style={{marginTop: 20}} />}
