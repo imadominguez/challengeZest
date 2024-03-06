@@ -3,7 +3,7 @@ import {Brewerie} from '../../../domain/entities/breweries';
 import {Pressable, StyleSheet, View} from 'react-native';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {HomeScreenStackParamList} from '../../navigator/HomeStackNavigator';
-import {useBrewerieStore} from '../../store/favorites-breweries.store';
+import {useBrewerieStore} from '../../store/breweries/favorites-breweries.store';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../../../config/theme/global-theme';

@@ -1,6 +1,6 @@
 import {View, Text} from 'react-native';
 import {Brewerie} from '../../../domain/entities/breweries';
-import {useBrewerieStore} from '../../store/favorites-breweries.store';
+import {useBrewerieStore} from '../../store/breweries/favorites-breweries.store';
 import {Button, useTheme} from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/Ionicons';
