@@ -24,6 +24,7 @@ export const colors = {
     bg_200: '#e1e1e1',
     bg_300: '#c1c1c1',
   },
+  colorTitle: '#916600',
 };
 
 export const globalTheme = StyleSheet.create({
@@ -34,5 +35,8 @@ export const globalTheme = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  title: {
+    color: colors.colorTitle,
   },
 });
