@@ -1,5 +1,5 @@
 import {create} from 'zustand';
-import {Brewerie} from '../../domain/entities/breweries';
+import {Brewerie} from '../../../domain/entities/breweries';
 
 interface BrewerieStore {
   breweries: Brewerie[];
